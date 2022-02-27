@@ -1,12 +1,14 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BookmarkManager.Business.Entities
 {
     /// <summary>
     /// Bookmark Entity
     /// </summary>
-    public class Bookmark
+    [Table("Bookmark")]
+    public class BookmarkEntity
     {
         [Key]
         public int Id { get; set; }
@@ -21,5 +23,6 @@ namespace BookmarkManager.Business.Entities
         [Required]
         public DateTime CreatedOn { get; set; }
         public DateTime? UpdatedOn { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

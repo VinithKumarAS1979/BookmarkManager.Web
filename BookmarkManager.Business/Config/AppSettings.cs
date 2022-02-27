@@ -1,6 +1,17 @@
-﻿namespace BookmarkManager.Business.Config
+﻿using Microsoft.Extensions.Configuration;
+
+namespace BookmarkManager.Business.Config
 {
-    public class AppSettings
+    public static class AppSettings
     {
+        public static string DbFileLocationAndName { get; set; }
+    }
+
+    public static class AppSettingsInitializer
+    {
+        public static void Initialize(IConfiguration configuration)
+        {
+            AppSettings.DbFileLocationAndName = configuration.GetConnectionString("DBFileLocationAndName");
+        }
     }
 }

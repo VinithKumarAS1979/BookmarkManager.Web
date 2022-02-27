@@ -7,7 +7,8 @@ namespace BookmarkManager.Business.Infrastructure
     public class BookmarkDbContext : DbContext
     {
         public string DbPath { get; }
-        public DbSet<Bookmark> Bookmarks { get; set; }
+        public DbSet<BookmarkEntity> Bookmarks { get; set; }
+
         public BookmarkDbContext()
         {
             var folder = Environment.SpecialFolder.LocalApplicationData;
@@ -19,7 +20,7 @@ namespace BookmarkManager.Business.Infrastructure
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Bookmark>(e =>
+            modelBuilder.Entity<BookmarkEntity>(e =>
             {
                 e.Property(p => p.CreatedOn).HasDefaultValueSql("CURRENT_TIMESTAMP");
             });
