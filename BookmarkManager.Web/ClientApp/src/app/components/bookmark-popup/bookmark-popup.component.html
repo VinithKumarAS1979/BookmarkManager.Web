@@ -1,0 +1,32 @@
+<h2 mat-dialog-title>{{ title }}</h2>
+<mat-dialog-content class="mat-typography dialogContentStyle">
+  <div class="row">
+    <div class="col">
+      <label>Title</label>
+    </div>
+    <div class="col">
+      <input matInput placeholder="Enter title" maxlength="150" [(ngModel)]="localData.title">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <label>Description</label>
+    </div>
+    <div class="col">
+      <input matInput placeholder="Enter description" maxlength="250" [(ngModel)]="localData.description">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <label>Is Active</label>
+    </div>
+    <div class="col">
+      <mat-checkbox [(ngModel)]="localData.isActive"></mat-checkbox>
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button type="button" (click)="onCancelClick()">Cancel</button>&nbsp;
+  <button mat-button type="button" [disabled]="!validated" [mat-dialog-close]="localData" (click)="onSaveClick()" cdkFocusInitial>Save</button>
+</mat-dialog-actions>
+

@@ -1,4 +1,5 @@
-﻿using BookmarkManager.Business.Entities;
+﻿using BookmarkManager.Business.Config;
+using BookmarkManager.Business.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 
@@ -11,9 +12,11 @@ namespace BookmarkManager.Business.Infrastructure
 
         public BookmarkDbContext()
         {
-            var folder = Environment.SpecialFolder.LocalApplicationData;
-            var path = Environment.GetFolderPath(folder);
-            DbPath = System.IO.Path.Join(path, "bookmark.db");
+            //var folder = Environment.SpecialFolder.LocalApplicationData;
+            //var path = Environment.GetFolderPath(folder);
+            //DbPath = System.IO.Path.Join(path, "bookmark.db");
+            var folder = AppSettings.DbFileLocationAndName;
+            DbPath = folder;
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options) => options.UseSqlite($"Data Source={ DbPath }");

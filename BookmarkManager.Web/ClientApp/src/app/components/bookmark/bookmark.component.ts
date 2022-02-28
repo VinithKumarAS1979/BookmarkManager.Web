@@ -1,10 +1,13 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { BookmarkModel } from '../../models/bookmark-model';
 import { ApiResponse } from '../../models/common/api-response';
 import { BookmarkService } from '../../services/bookmark.service';
+import { BookmarkPopupComponent } from '../bookmark-popup/bookmark-popup.component';
 
 @Component({
   selector: 'app-bookmark',
@@ -12,7 +15,8 @@ import { BookmarkService } from '../../services/bookmark.service';
   styleUrls: ['./bookmark.component.css']
 })
 export class BookmarkComponent implements OnInit {
-  private savedSuccessfully: string = "Saved successfully";
+  private savedSuccessfully: string = " - Bookmark Saved successfully";
+  private deletedSuccessfully: string = "Bookmark Deleted successfully";
   apiInfo: ApiResponse = new ApiResponse(null);
   bookmarksList: BookmarkModel[] = [];
   filteredRecords: BookmarkModel[] = [];
@@ -34,7 +38,7 @@ export class BookmarkComponent implements OnInit {
     return this.bookmarksList.length;
   }
 
-  constructor(private _bookmarkService: BookmarkService) { }
+  constructor(private _bookmarkService: BookmarkService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.loadBookmarksForListing();
@@ -52,15 +56,79 @@ export class BookmarkComponent implements OnInit {
   }
 
   addHandler() {
-    console.log("Add => ");
+    //console.log("Add => ");
+    let newData: BookmarkModel = new BookmarkModel(null);
+    let popupData: any = this.buildPopupDataContent("New", newData);
+    const dialogRef = this.dialog.open(BookmarkPopupComponent,
+      {
+        data: popupData
+      });
+
+    dialogRef.afterClosed().subscribe((result: string | any | null | undefined) => {
+      if (result != undefined && result != null && result.length != 0) {
+        result.createdOn = new Date();
+        this._bookmarkService.create(result).subscribe((result: ApiResponse) => {
+          this.apiInfo = result;
+          if (this.apiInfo.status) {
+            this.apiInfo.message = "New" + this.savedSuccessfully;
+            this.loadBookmarksForListing();
+          }
+        }
+        , (error: HttpErrorResponse) => {
+            this.setExceptionDetails(error);
+        });
+      }
+    });
   }
 
   editHandler(data: BookmarkModel) {
-    console.log("Edit => ", data);
+    //console.log("Edit => ", data);
+    let popupData: any = this.buildPopupDataContent("Modify", data);
+    const dialogRef = this.dialog.open(BookmarkPopupComponent,
+      {
+        data: popupData
+      });
+
+    dialogRef.afterClosed().subscribe((result: string | any | null | undefined) => {
+      if (result != undefined && result != null && result.length != 0) {
+        result.createdOn = new Date();
+        this._bookmarkService.update(result).subscribe((result: ApiResponse) => {
+          this.apiInfo = result;
+          if (this.apiInfo.status) {
+            this.apiInfo.message = "Modified" + this.savedSuccessfully;
+            this.loadBookmarksForListing();
+          }
+        }
+          , (error: HttpErrorResponse) => {
+            this.setExceptionDetails(error);
+          });
+      }
+    });
   }
 
   deleteHandler(data: BookmarkModel) {
-    console.log("Delete => ", data);
+    //console.log("Delete => ", data);
+    let popupData: any = this.buildPopupDataContent("Delete", data);
+    const dialogRef = this.dialog.open(BookmarkPopupComponent,
+      {
+        data: popupData
+      });
+
+    dialogRef.afterClosed().subscribe((result: string | any | null | undefined) => {
+      if (result != undefined && result != null && result.length != 0) {
+        result.createdOn = new Date();
+        this._bookmarkService.delete(result).subscribe((result: ApiResponse) => {
+          this.apiInfo = result;
+          if (this.apiInfo.status) {
+            this.apiInfo.message = this.deletedSuccessfully;
+            this.loadBookmarksForListing();
+          }
+        }
+          , (error: HttpErrorResponse) => {
+            this.setExceptionDetails(error);
+          });
+      }
+    });
   }
 
   filterRecords(rec: BookmarkModel | any, valueToCheck: string): boolean {
@@ -98,5 +166,17 @@ export class BookmarkComponent implements OnInit {
   onSearchTextChangeHandler(value: any | undefined) {
     console.log("SearchTextChange => ", value);
     this.computeFilteredDataForDisplay();
+  }
+
+  buildPopupDataContent(mode: string, data: BookmarkModel) {
+    return {
+      title: mode,
+      content: data
+    };
+  }
+
+  private setExceptionDetails(error: HttpErrorResponse) {
+    this.apiInfo = new ApiResponse(null);
+    this.apiInfo.message = error.message;
   }
 }

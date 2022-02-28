@@ -11,7 +11,7 @@ namespace BookmarkManager.Business.Config
     {
         public static void Initialize(IConfiguration configuration)
         {
-            AppSettings.DbFileLocationAndName = configuration.GetConnectionString("DBFileLocationAndName");
+            AppSettings.DbFileLocationAndName = configuration.GetValue<string>("DBFileLocationAndName");
         }
     }
 }

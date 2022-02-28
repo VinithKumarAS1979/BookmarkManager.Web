@@ -5,6 +5,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
@@ -18,6 +19,7 @@ const modules: any[] = [
   , MatPaginatorModule
   , MatSelectModule
   , MatCardModule
+  , MatCheckboxModule
   , MatProgressSpinnerModule
   , MatSortModule
   , MatDialogModule

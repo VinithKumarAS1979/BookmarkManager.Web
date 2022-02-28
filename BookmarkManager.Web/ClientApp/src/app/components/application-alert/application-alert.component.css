@@ -5,3 +5,7 @@
 .success-display {
   color: green;
 }
+
+.closeButton:hover {
+    cursor: pointer;
+}

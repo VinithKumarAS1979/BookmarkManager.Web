@@ -44,6 +44,8 @@ namespace BookmarkManager.Business.Services
             var data = _bookmarkRepository.GetAll().Where(x => x.IsDeleted == false && x.Id == id).FirstOrDefault();
             if (data == null)
                 return new ApiResponseModel { Exception = null, Message = "Bookmark Id is not valid", Status = false };
+            data.IsDeleted = true;
+            data.UpdatedOn = DateTime.Now;
             return _bookmarkRepository.Delete(data);
         }
     }

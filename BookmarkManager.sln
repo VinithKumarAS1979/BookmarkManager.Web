@@ -7,7 +7,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookmarkManager.Web", "Book
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookmarkManager.Business", "BookmarkManager.Business\BookmarkManager.Business.csproj", "{01D0FFC1-F68B-4EFD-A329-E4B63C41D1E5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookmarkManager.BusinessTests", "BookmarkManager.BusinessTests\BookmarkManager.BusinessTests.csproj", "{AF92C9E4-A5FF-43A2-BDE3-1AE7364054A8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookmarkManager.BusinessTests", "BookmarkManager.BusinessTests\BookmarkManager.BusinessTests.csproj", "{AF92C9E4-A5FF-43A2-BDE3-1AE7364054A8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{EF06109D-E47B-4065-9DBD-6562AE4521F6}"
+	ProjectSection(SolutionItems) = preProject
+		Database\bookmark.db = Database\bookmark.db
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

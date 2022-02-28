@@ -1,0 +1,12 @@
+.row {
+    padding-top: 20px;
+}
+
+.dialogContentStyle {
+  border-bottom-width: thin;
+  border-top-width: thin;
+  border-bottom-style: solid;
+  border-top-style: solid;
+  width: 600px;
+  height: 150px;
+}

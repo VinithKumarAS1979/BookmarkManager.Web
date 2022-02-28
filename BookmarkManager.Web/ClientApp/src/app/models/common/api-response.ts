@@ -13,7 +13,7 @@ export class ApiResponse {
       }
     }
     else {
-      this.status = true;
+      this.status = false;
       this.message = "";
     }
   }

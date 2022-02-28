@@ -10,6 +10,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { WinAuthInterceptorService } from './services/win-auth-interceptor.service';
 import { BookmarkComponent } from './components/bookmark/bookmark.component';
 import { ApplicationAlertComponent } from './components/application-alert/application-alert.component';
+import { BookmarkPopupComponent } from './components/bookmark-popup/bookmark-popup.component';
 
 const appRoutes: Routes = [
   { 'path': '', component: BookmarkComponent }
@@ -19,7 +20,8 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     BookmarkComponent,
-    ApplicationAlertComponent
+    ApplicationAlertComponent,
+    BookmarkPopupComponent
   ],
   imports: [
     BrowserModule,
