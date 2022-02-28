@@ -22,7 +22,7 @@ namespace BookmarkManager.Web
         {
             DIConfiguration.Initialize(services, Configuration);
             services.AddControllersWithViews();
-            services.AddSwaggerGen();
+            SwaggerGenerateDocumentation(services);
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
@@ -35,6 +35,7 @@ namespace BookmarkManager.Web
         {
             if (env.IsDevelopment())
             {
+                SwaggerUIMap(app);
                 app.UseDeveloperExceptionPage();
             }
             else
@@ -70,5 +71,14 @@ namespace BookmarkManager.Web
                 }
             });
         }
+
+        #region Swagger Configuration
+        private void SwaggerGenerateDocumentation(IServiceCollection services) => services.AddSwaggerGen();
+        private void SwaggerUIMap(IApplicationBuilder app)
+        {
+            app.UseSwagger();
+            app.UseSwaggerUI();
+        }
+        #endregion
     }
 }
