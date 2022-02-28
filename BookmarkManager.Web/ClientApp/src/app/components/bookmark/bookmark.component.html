@@ -1,0 +1,70 @@
+<div class="row">
+  <div class="col">
+    <h3>Bookmark(s)</h3>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <app-application-alert [alertData]="apiInfo"></app-application-alert>
+  </div>
+</div>
+<div class="row myWidthSetting">
+  <div class="col">
+    <form class="example-form">
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Search Text</mat-label>
+        <input matInput placeholder="Something to search" [(ngModel)]="searchString" name="inputSearch"
+               (ngModelChange)="onSearchTextChangeHandler($event)">
+      </mat-form-field>
+    </form>
+  </div>
+  <div class="col setToRight">
+    <button title="Remove bids" class="btn btn-sm btn-primary" (click)="addHandler()">
+      <mat-icon>Add</mat-icon>
+    </button>
+  </div>
+</div>
+<div>
+  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
+      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+    <ng-container matColumnDef="title">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Title </th>
+      <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+    </ng-container>
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
+      <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+    </ng-container>
+    <ng-container matColumnDef="createdOn">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Created On </th>
+      <td mat-cell *matCellDef="let element"> {{element.createdOn | date:'dd-LLL-yyyy hh:mm' }} </td>
+    </ng-container>
+    <ng-container matColumnDef="updatedOn">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Updated On </th>
+      <td mat-cell *matCellDef="let element"> {{element.updatedOn | date:'dd-LLL-yyyy hh:mm' }} </td>
+    </ng-container>
+    <ng-container matColumnDef="isActive">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Is Active </th>
+      <td mat-cell *matCellDef="let element"> {{element.isActive }} </td>
+    </ng-container>
+    <ng-container matColumnDef="btnsList">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> </th>
+      <td mat-cell *matCellDef="let element">
+        <div>
+          <button title="Remove bids" class="btn btn-sm btn-primary" (click)="editHandler(element)">
+            <mat-icon>Edit</mat-icon>
+          </button>&nbsp;
+          <button title="Remove bids" class="btn btn-sm btn-primary" (click)="deleteHandler(element)">
+            <mat-icon>Delete</mat-icon>
+          </button>
+        </div>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayColumns;"></tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [length]="totalRecordsLength" [pageSize]="10" aria-label="Select page of GitHub search results"></mat-paginator>
+</div>

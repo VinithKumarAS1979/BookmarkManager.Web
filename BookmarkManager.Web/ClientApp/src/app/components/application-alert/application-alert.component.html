@@ -1,0 +1,14 @@
+<div class="row" *ngIf="canDisplay()">
+  <div class="col-11" [class.error-display]="!alertData.status" [class.success-display]="alertData.status">
+    <mat-card [class.error-display]="!alertData.status" [class.success-display]="alertData.status">
+      <mat-icon *ngIf="alertData.status">check_circle</mat-icon> <mat-icon *ngIf="!alertData.status">bug_report</mat-icon> Message: {{ alertData.message }}
+    </mat-card>
+    <mat-card *ngFor="let exception of alertData.exceptions" [class.error-display]="!alertData.status" [class.success-display]="alertData.status">
+      <mat-icon *ngIf="alertData.status">check_circle</mat-icon> <mat-icon *ngIf="!alertData.status">bug_report</mat-icon> Message: {{ exception.message }}<br />
+      Stack Trace: {{ exception.stackTrace }}
+    </mat-card>
+  </div>
+  <div class="col-1" [class.error-display]="!alertData.status" [class.success-display]="alertData.status">
+    <mat-icon (click)="clearHandler()">close</mat-icon>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+table {
+    width: 95%;
+}
+
+td {
+    padding: 15px;
+}
+
+mat-paginator {
+    width: 95%;
+}
+
+.mat-form-field-appearance-fill {
+  background-color: darkgray;
+}
+
+.myWidthSetting {
+    width: 95%;
+}
+
+.setToRight {
+    text-align: right;
+}

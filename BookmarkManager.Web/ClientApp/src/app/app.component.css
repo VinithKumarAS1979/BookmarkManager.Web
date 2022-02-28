@@ -1,0 +1,9 @@
+.toolbarBackground {
+    background-color: blue;
+    color: white;
+    margin-top: 5px;
+}
+
+.contentRow {
+    margin-top: 15px;
+}
