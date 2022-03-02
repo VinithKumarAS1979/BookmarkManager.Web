@@ -18,6 +18,9 @@ export class BookmarkPopupComponent implements OnInit {
       (this.localData.description != "" && this.localData.description.length < 250);
   }
 
+  get confirmButtonText(): string {
+    return this.title === "Delete" ? "Delete" : "Save";
+  }
   constructor(public dialogRef: MatDialogRef<BookmarkPopupComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
     this.title = data.title + " Bookmark";
